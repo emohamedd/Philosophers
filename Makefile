@@ -1,9 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/06/14 17:44:58 by emohamed          #+#    #+#              #
+#    Updated: 2023/06/14 17:50:25 by emohamed         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
-
 NAME = philo
-
-SRCS = *.c
+SRCS = atoi_up.c from_av_to_philo.c functions.c main.c philo_need.c
 OBJS = $(SRCS:.c=.o)
 
 %.o: %.c
@@ -14,11 +25,10 @@ all : $(NAME)
 
 
 $(NAME): $(OBJS) 
-	$(CC) $(CFLAGS) $^  -o $@ 
+	$(CC) $(CFLAGS) $^ -o $@ 
 
 clean:
-	make -C libft/ clean
-	rm -f $(OBJS) $(OBJS_BONUS)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)

@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:02:43 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/14 16:08:28 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:48:07 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int	check_char(char  c, char  *set)
 	}
 	return (0);
 }
-char	*ft_substr(char  *s, unsigned int start, size_t len)
+char	*ft_substr(char  *s,  int start, int len)
 {
 	char	*p;
-	size_t	i;
+	int	i;
 
 	if (!s)
 		return (NULL);

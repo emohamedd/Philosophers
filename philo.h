@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 12:35:59 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/14 17:38:00 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:49:51 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <limits.h>
 #include <stdlib.h>
 
-int err(void);
-
 typedef struct common_arg
 {
     int n_philo;
@@ -31,10 +29,6 @@ typedef struct common_arg
     int neat_philo;
 }			c_arg;
 
-void *is_eating();
-void *is_thinking();
-void *is_sleeping();
-void *is_dead();
 long long	ft_atoi_up(char *str);
 char	*ft_strtrim(char *s1, char *set);
 int ft_strlen(char *s);
