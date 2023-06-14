@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 12:36:02 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/14 18:36:48 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/14 18:51:22 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,12 @@ void *routine(void *p)
     p_arg *philo;
     
     philo = (p_arg *)p;
-    printf("philo id %d\n", philo->id);
+    printf("%d\n", philo->id);
     return NULL;
 }
 int main(int ac, char **av)
 {
     c_arg philo;
-    
-    
 
     if (ac < 5 || ac > 6)
     {
