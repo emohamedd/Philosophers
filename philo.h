@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 12:35:59 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/14 17:49:51 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/14 18:20:05 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <limits.h>
 #include <stdlib.h>
 
+typedef struct ncom_arg p_arg;
+
 typedef struct common_arg
 {
     int n_philo;
@@ -27,7 +29,15 @@ typedef struct common_arg
     int teat_philo;
     int tsleep_philo;
     int neat_philo;
+    p_arg *philos;
+    pthread_t *threads;
+    
 }			c_arg;
+typedef struct ncom_arg
+{
+    int id;
+    int start_time;
+}			p_arg;
 
 long long	ft_atoi_up(char *str);
 char	*ft_strtrim(char *s1, char *set);
