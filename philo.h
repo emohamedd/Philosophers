@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 12:35:59 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/05 14:52:01 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:38:00 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,27 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <pthread.h>
+# include <limits.h>
+#include <stdlib.h>
 
 int err(void);
 
-typedef struct s_arg
+typedef struct common_arg
 {
     int n_philo;
     int trip_philo;
     int teat_philo;
     int tsleep_philo;
     int neat_philo;
-}			t_arg;
+}			c_arg;
+
 void *is_eating();
 void *is_thinking();
 void *is_sleeping();
 void *is_dead();
+long long	ft_atoi_up(char *str);
+char	*ft_strtrim(char *s1, char *set);
+int ft_strlen(char *s);
+int from_av_to_philo(c_arg *philo, int ac, char **av);
 
 #endif
