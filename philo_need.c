@@ -6,21 +6,25 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 16:02:43 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/14 17:48:07 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/15 19:46:44 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-int ft_strlen(char *s)
+
+int	ft_strlen(char *s)
 {
-    int i = 0;
-    while(s[i])
-    {
-        i++;
-    }
-    return i;
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		i++;
+	}
+	return (i);
 }
-int	check_char(char  c, char  *set)
+
+int	check_char(char c, char *set)
 {
 	int	j;
 
@@ -33,10 +37,11 @@ int	check_char(char  c, char  *set)
 	}
 	return (0);
 }
-char	*ft_substr(char  *s,  int start, int len)
+
+char	*ft_substr(char *s, int start, int len)
 {
 	char	*p;
-	int	i;
+	int		i;
 
 	if (!s)
 		return (NULL);
