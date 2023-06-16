@@ -12,31 +12,42 @@
 
 #include "philo.h"
 
-int	is_rip(t_arg philo)
+int	is_rip(t_arg *philo, int *h)
 {
 	int	i;
+	int	all_eat;
+	int	j;
 
+	j = 0;
+	all_eat = 0;
 	i = 0;
-	while (1)
+	while (i < philo->n_philo)
 	{
-		i = 0;
-		while (i < philo.n_philo)
+		if (philo->neat_philo != -1)
 		{
-			if (philo.philos[i].cmeal == philo.neat_philo)
-				return 1;
-			if ((get_current_t()
-					- philo.philos[i].last_meal) >= philo.trip_philo)
+			j = 0;
+			while (j < philo->n_philo)
 			{
-				printf("%lld %d is dead\n", get_current_t()
-					- philo.philos[i].start_time, philo.philos[i].id);
-				i = -1;
-				while (++i < philo.n_philo)
-					pthread_mutex_destroy(&philo.fork[i]);
-				pthread_mutex_destroy(&philo.protect_print);
+				if (philo->philos[j].cmeal == philo->neat_philo)
+					all_eat++;
+				j++;
+			}
+			if (all_eat == philo->n_philo)
+			{
+				*h = 1;
 				return (1);
 			}
-			i++;
 		}
+		if ((get_current_t() - philo->philos[i].last_meal) >= philo->trip_philo)
+		{
+			*h = 1;
+			printf("%lld %d is dead\n", get_current_t()
+				- philo->philos[i].start_time, philo->philos[i].id);
+			return (1);
+		}
+		i++;
 	}
 	return (0);
 }
+
+
