@@ -43,11 +43,10 @@ int	is_rip(t_arg *philo, int *h)
 			*h = 1;
 			printf("%lld %d is dead\n", get_current_t()
 				- philo->philos[i].start_time, philo->philos[i].id);
+
 			return (1);
 		}
 		i++;
 	}
 	return (0);
 }
-
-

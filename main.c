@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 12:36:02 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/16 15:28:06 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/16 17:13:44 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,11 @@ int	main(int ac, char **av)
 	while (1)
 	{
 		if (is_rip(&philo, &debug))
+		{
+			full_thread_detach(&philo);
 			break ;
+		}
 	}
 	full_thread_join(&philo);
+	destroy_mutex(&philo);
 }

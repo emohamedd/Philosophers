@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 10:53:06 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/16 15:33:54 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/16 17:13:00 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,18 @@ void	full_mutex(t_arg *philo)
 	}
 }
 
+void	full_thread_detach(t_arg *philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < philo->n_philo)
+	{
+		pthread_detach(philo->threads[i]);
+		i++;
+	}
+}
+
 void	full_thread_join(t_arg *philo)
 {
 	int	i;
@@ -72,7 +84,7 @@ void	full_thread_join(t_arg *philo)
 
 void	destroy_mutex(t_arg *philo)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < philo->n_philo)
