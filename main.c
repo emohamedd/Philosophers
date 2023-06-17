@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 12:36:02 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/17 13:02:43 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:59:54 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,16 @@ void	*routine(void *p)
 	philo = (t_s_arg *)p;
 	if (philo->id % 2 == 0)
 		usleep(200);
-	while (*philo->rip == 0)
+	while (1)
 	{
+		pthread_mutex_lock(&philo->data->protect_print);
+		if (*philo->rip == 1)
+		{
+			pthread_mutex_unlock(&philo->data->protect_print);
+			break;
+		}
+		pthread_mutex_unlock(&philo->data->protect_print);
+		
 		pthread_mutex_lock(philo->left_f);
 		print_protect(philo, "has taken a fork\n");
 		pthread_mutex_lock(philo->right_f);
@@ -61,15 +69,9 @@ int	main(int ac, char **av)
 	full_thread(&philo);
 	while (1)
 	{
-		pthread_mutex_lock(&philo.protect_print);
 		if (is_rip(&philo, &debug))
-		{
-			full_thread_detach(&philo);
 				break ;
-		}
-		pthread_mutex_unlock(&philo.protect_print);
 	}
 	full_thread_join(&philo);
-	// destroy_mutex(&philo);
-
+	destroy_mutex(&philo);
 }
