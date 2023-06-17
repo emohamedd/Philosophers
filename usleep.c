@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 12:16:27 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/16 15:05:07 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/17 13:29:54 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	sleeping(int n, t_s_arg *philo)
 
 	save_time = get_current_t();
 	end = n + save_time;
+	pthread_mutex_lock(&philo->data->protect_death);
 	while (get_current_t() <= end && !*philo->rip)
+	pthread_mutex_unlock(&philo->data->protect_death);
 		usleep(100);
 }

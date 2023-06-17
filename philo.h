@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 12:35:59 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/16 17:13:13 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:28:27 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_common_arg
 	pthread_t				*threads;
 	pthread_mutex_t			*fork;
 	pthread_mutex_t			protect_print;
+	pthread_mutex_t			protect_death;
 
 }							t_arg;
 typedef struct s_ncom_arg

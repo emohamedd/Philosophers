@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 12:36:02 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/16 17:13:44 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/17 13:02:43 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ void	*routine(void *p)
 		pthread_mutex_lock(philo->right_f);
 		print_protect(philo, "has taken a fork\n");
 		print_protect(philo, "is eating\n");
+		pthread_mutex_lock(&philo->data->protect_print);
 		philo->cmeal++;
 		philo->last_meal = get_current_t();
+		pthread_mutex_unlock(&philo->data->protect_print);
 		sleeping(philo->data->teat_philo, philo);
 		pthread_mutex_unlock(philo->right_f);
 		pthread_mutex_unlock(philo->left_f);
@@ -54,16 +56,20 @@ int	main(int ac, char **av)
 	allocat(&philo);
 	full_mutex(&philo);
 	pthread_mutex_init(&philo.protect_print, NULL);
+	pthread_mutex_init(&philo.protect_death, NULL);
 	full_philo(&philo, &debug);
 	full_thread(&philo);
 	while (1)
 	{
+		pthread_mutex_lock(&philo.protect_print);
 		if (is_rip(&philo, &debug))
 		{
 			full_thread_detach(&philo);
-			break ;
+				break ;
 		}
+		pthread_mutex_unlock(&philo.protect_print);
 	}
 	full_thread_join(&philo);
-	destroy_mutex(&philo);
+	// destroy_mutex(&philo);
+
 }

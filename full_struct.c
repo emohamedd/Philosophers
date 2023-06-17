@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 10:53:06 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/16 17:13:00 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/17 13:02:19 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,6 @@ void	destroy_mutex(t_arg *philo)
 		pthread_mutex_destroy(&philo->fork[i]);
 		i++;
 	}
+	pthread_mutex_destroy(&philo->protect_death);
+	pthread_mutex_destroy(&philo->protect_print);
 }
