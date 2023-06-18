@@ -12,23 +12,23 @@
 
 #include "philo.h"
 
-// void point_to_death(t_s_arg *philo)
-// {
-// 		pthread_mutex_lock(&philo->data->protect_print);
-// 		if (*philo->rip == 1)
-// 		{
-// 			pthread_mutex_unlock(&philo->data->protect_print);
-// 			return 0;
-// 		}
-// 		pthread_mutex_unlock(&philo->data->protect_print);
-// }
+int	point_to_death(t_s_arg *philo)
+{
+	pthread_mutex_lock(&philo->data->protect_print);
+	if (*philo->rip == 1)
+	{
+		pthread_mutex_unlock(&philo->data->protect_print);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->data->protect_print);
+	return (0);
+}
 
 int	is_rip(t_arg *philo, int *h)
 {
-	int			i;
-	int			all_eat;
-	int			j;
-	long long	period;
+	int	i;
+	int	all_eat;
+	int	j;
 
 	j = 0;
 	all_eat = 0;
@@ -57,20 +57,8 @@ int	is_rip(t_arg *philo, int *h)
 				return (1);
 			}
 		}
-		pthread_mutex_lock(&philo->protect_print);
-		period = (get_current_t() - philo->philos[i].last_meal);
-		pthread_mutex_unlock(&philo->protect_print);
-		if (period >= philo->trip_philo)
-		{
-			pthread_mutex_lock(&philo->protect_print);
-			*h = 1;
-			pthread_mutex_unlock(&philo->protect_print);
-			printf("%lld %d is dead\n", get_current_t()
-				- philo->philos[i].start_time, philo->philos[i].id);
-			if (philo->n_philo == 1)
-				pthread_mutex_unlock(philo->philos[i].left_f);
+		if (time_to_die(philo, h))
 			return (1);
-		}
 		i++;
 	}
 	return (0);

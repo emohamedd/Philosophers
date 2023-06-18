@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 12:36:02 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/18 15:08:28 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:18:49 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,7 @@ void	*routine(void *p)
 	philo = (t_s_arg *)p;
 	if (philo->id % 2 == 0)
 		usleep(200);
-	while (1)
-	{
-		pthread_mutex_lock(&philo->data->protect_print);
-		if (*philo->rip == 1)
-		{
-			pthread_mutex_unlock(&philo->data->protect_print);
-			break ;
-		}
-		pthread_mutex_unlock(&philo->data->protect_print);
-		pthread_mutex_lock(philo->left_f);
-		print_protect(philo, "has taken a fork\n");
-		pthread_mutex_lock(philo->right_f);
-		print_protect(philo, "has taken a fork\n");
-		print_protect(philo, "is eating\n");
-		pthread_mutex_lock(&philo->data->protect_print);
-		philo->cmeal++;
-		philo->last_meal = get_current_t();
-		pthread_mutex_unlock(&philo->data->protect_print);
-		sleeping(philo->data->teat_philo, philo);
-		pthread_mutex_unlock(philo->right_f);
-		pthread_mutex_unlock(philo->left_f);
-		print_protect(philo, "is sleeping\n");
-		sleeping(philo->data->tsleep_philo, philo);
-		print_protect(philo, "is thinking\n");
-	}
+	loop_t(philo);
 	return (NULL);
 }
 
