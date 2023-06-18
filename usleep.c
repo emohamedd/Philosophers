@@ -33,7 +33,7 @@ void	sleeping(int n, t_s_arg *philo)
 		if (*philo->rip == 1)
 		{
 			pthread_mutex_unlock(&philo->data->protect_print);
-			break;
+			break ;
 		}
 		pthread_mutex_unlock(&philo->data->protect_print);
 		usleep(100);

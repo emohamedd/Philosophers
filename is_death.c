@@ -12,62 +12,66 @@
 
 #include "philo.h"
 
-int is_rip(t_arg *philo, int *h) 
+// void point_to_death(t_s_arg *philo)
+// {
+// 		pthread_mutex_lock(&philo->data->protect_print);
+// 		if (*philo->rip == 1)
+// 		{
+// 			pthread_mutex_unlock(&philo->data->protect_print);
+// 			return 0;
+// 		}
+// 		pthread_mutex_unlock(&philo->data->protect_print);
+// }
+
+int	is_rip(t_arg *philo, int *h)
 {
-    int i;
-    int all_eat;
-    int j;
+	int			i;
+	int			all_eat;
+	int			j;
+	long long	period;
 
-    j = 0;
-    all_eat = 0;
-    i = 0;
-    long long period;
-    while (i < philo->n_philo)
-	 {
-        if (philo->neat_philo != -1) 
+	j = 0;
+	all_eat = 0;
+	i = 0;
+	while (i < philo->n_philo)
+	{
+		if (philo->neat_philo != -1)
 		{
-            j = 0;
-            while (j < philo->n_philo) 
+			j = 0;
+			while (j < philo->n_philo)
 			{
-                pthread_mutex_lock(&philo->protect_print);
-                if (philo->philos[j].cmeal == philo->neat_philo)
-                {
-                    pthread_mutex_unlock(&philo->protect_print);
-                    all_eat++;
-                }
-                pthread_mutex_unlock(&philo->protect_print);
-                j++;
-            }
-            if (all_eat == philo->n_philo) 
+				pthread_mutex_lock(&philo->protect_print);
+				if (philo->philos[j].cmeal == philo->neat_philo)
+				{
+					pthread_mutex_unlock(&philo->protect_print);
+					all_eat++;
+				}
+				pthread_mutex_unlock(&philo->protect_print);
+				j++;
+			}
+			if (all_eat == philo->n_philo)
 			{
-                pthread_mutex_lock(&philo->protect_print);
-                *h = 1;
-                pthread_mutex_unlock(&philo->protect_print); 
-                return 1;
-            }
-        }
-        // pthread_mutex_unlock(&philo->protect_death); 
-        pthread_mutex_lock(&philo->protect_print); 
-        period = (get_current_t() - philo->philos[i].last_meal);
-        pthread_mutex_unlock(&philo->protect_print); 
-        if (period >= philo->trip_philo)
-		 {
-            pthread_mutex_lock(&philo->protect_print); 
-            *h = 1;
-            pthread_mutex_unlock(&philo->protect_print); 
-            printf("%lld %d is dead\n", get_current_t() - philo->philos[i].start_time, philo->philos[i].id);
-            if (philo->n_philo == 1)
-                pthread_mutex_unlock(philo->philos[i].left_f);
-            return 1;
-        } 
-        i++;
-    }
-    return 0;
+				pthread_mutex_lock(&philo->protect_print);
+				*h = 1;
+				pthread_mutex_unlock(&philo->protect_print);
+				return (1);
+			}
+		}
+		pthread_mutex_lock(&philo->protect_print);
+		period = (get_current_t() - philo->philos[i].last_meal);
+		pthread_mutex_unlock(&philo->protect_print);
+		if (period >= philo->trip_philo)
+		{
+			pthread_mutex_lock(&philo->protect_print);
+			*h = 1;
+			pthread_mutex_unlock(&philo->protect_print);
+			printf("%lld %d is dead\n", get_current_t()
+				- philo->philos[i].start_time, philo->philos[i].id);
+			if (philo->n_philo == 1)
+				pthread_mutex_unlock(philo->philos[i].left_f);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
-
-
-
-
-
-
-

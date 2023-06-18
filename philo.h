@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 12:35:59 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/17 12:28:27 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:07:05 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void						full_mutex(t_arg *philo);
 int							is_rip(t_arg *philo, int *h);
 void						full_thread_join(t_arg *philo);
 int							allocat(t_arg *philo);
-void	destroy_mutex(t_arg *philo);
-void	full_thread_detach(t_arg *philo);
+void						destroy_mutex(t_arg *philo);
+void						full_thread_detach(t_arg *philo);
+void point_to_death(t_s_arg *philo);
 
 #endif
