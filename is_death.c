@@ -24,38 +24,50 @@ int	point_to_death(t_s_arg *philo)
 	return (0);
 }
 
-int	is_rip(t_arg *philo, int *h)
+int	count_meals(t_arg *philo)
 {
-	int	i;
-	int	all_eat;
 	int	j;
+	int	all_eat;
 
 	j = 0;
 	all_eat = 0;
+	while (j < philo->n_philo)
+	{
+		pthread_mutex_lock(&philo->protect_print);
+		if (philo->philos[j].cmeal == philo->neat_philo)
+			all_eat++;
+		pthread_mutex_unlock(&philo->protect_print);
+		j++;
+	}
+	return (all_eat);
+}
+
+int	check_all_eat(t_arg *philo, int *h)
+{
+	int	all_eat;
+
+	all_eat = count_meals(philo);
+	if (all_eat == philo->n_philo)
+	{
+		pthread_mutex_lock(&philo->protect_print);
+		*h = 1;
+		pthread_mutex_unlock(&philo->protect_print);
+		return (1);
+	}
+	return (0);
+}
+
+int	is_rip(t_arg *philo, int *h)
+{
+	int	i;
+
 	i = 0;
 	while (i < philo->n_philo)
 	{
 		if (philo->neat_philo != -1)
 		{
-			j = 0;
-			while (j < philo->n_philo)
-			{
-				pthread_mutex_lock(&philo->protect_print);
-				if (philo->philos[j].cmeal == philo->neat_philo)
-				{
-					pthread_mutex_unlock(&philo->protect_print);
-					all_eat++;
-				}
-				pthread_mutex_unlock(&philo->protect_print);
-				j++;
-			}
-			if (all_eat == philo->n_philo)
-			{
-				pthread_mutex_lock(&philo->protect_print);
-				*h = 1;
-				pthread_mutex_unlock(&philo->protect_print);
+			if (check_all_eat(philo, h))
 				return (1);
-			}
 		}
 		if (time_to_die(philo, h))
 			return (1);
