@@ -6,7 +6,7 @@
 /*   By: emohamed <emohamed@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 12:35:59 by emohamed          #+#    #+#             */
-/*   Updated: 2023/06/20 12:25:27 by emohamed         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:32:17 by emohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ void						destroy_mutex(t_arg *philo);
 void						full_thread_detach(t_arg *philo);
 int							point_to_death(t_s_arg *philo);
 void						loop_t(t_s_arg *philo);
-int							time_to_die(t_arg *philo, int *h);
+int							time_to_die(t_s_arg *philo, int *h);
 #endif

@@ -69,7 +69,7 @@ int	is_rip(t_arg *philo, int *h)
 			if (check_all_eat(philo, h))
 				return (1);
 		}
-		if (time_to_die(philo, h))
+		if (time_to_die(&philo->philos[i], h))
 			return (1);
 		i++;
 	}
